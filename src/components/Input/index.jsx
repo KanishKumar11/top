@@ -11,6 +11,7 @@ const variants = {
 const shapes = { square: "rounded-none", round: "rounded-[12px]" };
 const sizes = { xs: "p-0.5", sm: "p-[11px]" };
 
+// eslint-disable-next-line react/display-name
 const Input = React.forwardRef(
   (
     {
@@ -31,7 +32,7 @@ const Input = React.forwardRef(
       color = "white_A700",
       ...restProps
     },
-    ref,
+    ref
   ) => {
     const handleChange = (e) => {
       if (onChange) onChange(e?.target?.value);
@@ -61,7 +62,7 @@ const Input = React.forwardRef(
         {!!errors && <ErrorMessage errors={errors} />}
       </>
     );
-  },
+  }
 );
 
 Input.propTypes = {
