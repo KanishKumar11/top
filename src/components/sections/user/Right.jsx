@@ -107,7 +107,7 @@ const Right = ({ data, service, feedback }) => {
   }, [data, profile, service, serviceData]);
   return (
     <div className=" bg-[#efece3]  w-full py-16 7md:px-[4%] px-[8.33%] flex flex-col gap-5 ">
-      <div className="mb-10 flex items-center flex-wrap justify-start p-3.5 gap-5 flex-row">
+      {/* <div className="mb-10 flex items-center flex-wrap justify-start p-3.5 gap-5 flex-row">
         {profile?.featured.map((item, index) => (
           <Link
             href={item.link}
@@ -133,7 +133,7 @@ const Right = ({ data, service, feedback }) => {
             </div>
           </Link>
         ))}
-      </div>
+      </div> */}
       <div className="flex flex-col gap-y-[32px] w-full">
         <div className="flex w-full items-center justify-center">
           <div
@@ -167,7 +167,7 @@ const Right = ({ data, service, feedback }) => {
             Package
           </div>
         </div>
-        <div className="w-full">
+        {/* <div className="w-full">
           {active == "all" && (
             <div className="flex flex-wrap w-full gap-5">
               {service.map((item, index) => (
@@ -359,7 +359,7 @@ const Right = ({ data, service, feedback }) => {
               ))}
             </div>
           )}
-        </div>
+        </div> */}
       </div>
       <div className="my-10">
         <div>
@@ -423,16 +423,16 @@ const Right = ({ data, service, feedback }) => {
           </h2>
         </div>
         <div className="flex gap-[26px] flex-wrap">
-          {profile?.social.map((item) => (
-            <Link href={item.link} key={item.title}>
+          {/* {profile?.social.map((item) => ( */}
+          {/* <Link href={item.link} key={item.title}>
               <div className="p-[22px] text-4xl bg-[#ffffff]/[95%] shadow-md rounded-[16px] text-black-900">
                 {item?.title == "linkedIn" && <FaLinkedin />}
                 {item?.title == "github" && <FaGithub />}
                 {item?.title == "youtube" && <FaYoutube />}
                 {item?.title == "link" && <IoMdLink />}
               </div>
-            </Link>
-          ))}
+            </Link> */}
+          {/* ))} */}
         </div>
         <div
           className="flex flex-col gap-5 my-10 font-medium text-[#000000]/[88%] leading-[45px] text-lg

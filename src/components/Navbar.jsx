@@ -2,6 +2,7 @@
 import React from "react";
 import { Button, Img, List, Text } from "@/components";
 import Link from "next/link";
+import Image from "next/image";
 
 const Navbar = () => {
   const [active, setActive] = React.useState(false);
@@ -57,10 +58,12 @@ const Navbar = () => {
             )}
           </div>
           <Link href="/">
-            <Img
+            <Image
               className="h-[37px] ml-5"
               src="/images/img_linkimage.svg"
               alt="linkimage"
+              width={90}
+              height={90}
             />
           </Link>
         </div>

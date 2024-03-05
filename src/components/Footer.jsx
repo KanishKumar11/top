@@ -1,15 +1,18 @@
 import React from "react";
 import { Text, Img } from "@/components";
+import Image from "next/image";
 const Footer = () => {
   return (
     <div className="bg-gray-900 flex flex-col items-center justify-start p-[94px] md:px-10 sm:px-5 w-full">
       <div className="flex flex-col items-center justify-start max-w-[1200px] mb-[5px] mx-auto w-full">
         <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
           <div className="flex md:flex-1 flex-col items-start justify-start w-[42%] md:w-full">
-            <Img
+            <Image
               className="h-24"
-              src="images/img_linkimage_white_a700.svg"
+              src="/images/img_linkimage_white_a700.svg"
               alt="linkimage_One"
+              width={100}
+              height={100}
             />
             <Text
               className="mt-[87px] text-[13.89px] text-white-A700"
@@ -83,24 +86,30 @@ const Footer = () => {
             </div>
             <div className="flex flex-row gap-10 items-center justify-start w-[43%] md:w-full">
               <div className="bg-black-900 flex flex-col h-[30px] items-center justify-start rounded-[50%] w-[30px]">
-                <Img
+                <Image
                   className="h-[30px] rounded-[50%] w-[30px]"
-                  src="images/img_link.svg"
+                  src="/images/img_link.svg"
                   alt="link"
+                  width={30}
+                  height={30}
                 />
               </div>
               <div className="bg-black-900 flex flex-col h-[30px] items-center justify-start rounded-[50%] w-[30px]">
-                <Img
+                <Image
                   className="h-7 w-7"
-                  src="images/img_imgtwitter.svg"
+                  src="/images/img_imgtwitter.svg"
                   alt="imgtwitter"
+                  width={30}
+                  height={30}
                 />
               </div>
               <div className="bg-black-900 flex flex-col h-[30px] items-center justify-start rounded-[50%] w-[30px]">
-                <Img
+                <Image
                   className="h-[30px] rounded-[50%] w-[30px]"
-                  src="images/img_info.svg"
+                  src="/images/img_info.svg"
                   alt="info"
+                  width={30}
+                  height={30}
                 />
               </div>
             </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Img, List, Text } from "@/components";
+import Image from "next/image";
 
 const Home = () => {
   const [active, setActive] = useState("data");
@@ -11,9 +12,11 @@ const Home = () => {
           <div className="flex md:flex-col flex-row md:gap-5 items-center justify-center max-w-[1200px] mx-auto md:px-5 w-full">
             <div className="flex md:flex-1 flex-col items-start justify-start w-[59%] md:w-full">
               <div className="flex flex-col items-start justify-start w-[83%] md:w-full">
-                <Img
+                <Image
                   className="h-[50px] sm:h-auto object-cover w-[71%] md:w-full"
-                  src="images/img_linklaunchstoriespng.png"
+                  height={500}
+                  width={500}
+                  src="/images/img_linklaunchstoriespng.png"
                   alt="linklaunchstori"
                 />
                 <div className="md:h-[150px] mt-[30px] relative w-3/4 sm:w-full ">
@@ -49,18 +52,22 @@ const Home = () => {
                     >
                       Start My Page
                     </Text>
-                    <Img
+                    <Image
                       className="h-5 mr-[39px] w-5"
-                      src="images/img_imgarrowright.svg"
+                      height={20}
+                      width={20}
+                      src="/images/img_imgarrowright.svg"
                       alt="imgarrowright"
                     />
                   </div>
                   <Button
                     className="cursor-pointer flex items-center justify-center min-w-[284px] rounded-md"
                     leftIcon={
-                      <Img
+                      <Image
                         className="h-[42px] mr-2"
-                        src="images/img_overflowmenu.svg"
+                        src="/images/img_overflowmenu.svg"
+                        width={42}
+                        height={42}
                         alt="overflow_menu"
                       />
                     }
@@ -76,54 +83,72 @@ const Home = () => {
                 <div className="flex sm:flex-col flex-row gap-5 items-start justify-start mt-[30px] w-[66%] md:w-full">
                   <div className="flex relative w-[47%] sm:w-full">
                     <div className="flex my-auto mx-auto">
-                      <Img
+                      <Image
                         className="h-[50px] my-auto rounded-[50%] w-[50px]"
-                        src="images/img_image.png"
+                        src="/images/img_image.png"
+                        height={50}
+                        width={50}
                         alt="image_One"
                       />
-                      <Img
+                      <Image
                         className="h-[50px] ml-[-8px] my-auto rounded-[50%] w-[50px] z-[1]"
-                        src="images/img_image_50x50.png"
+                        height={50}
+                        width={50}
+                        src="/images/img_image_50x50.png"
                         alt="image_Two"
                       />
-                      <Img
+                      <Image
                         className="h-[50px] ml-[-8px] my-auto rounded-[50%] w-[50px] z-[1]"
-                        src="images/img_image_1.png"
+                        height={50}
+                        width={50}
+                        src="/images/img_image_1.png"
                         alt="image_Three"
                       />
-                      <Img
+                      <Image
                         className="h-[50px] ml-[-8px] my-auto rounded-[50%] w-[50px] z-[1]"
-                        src="images/img_image_2.png"
+                        height={50}
+                        width={50}
+                        src="/images/img_image_2.png"
                         alt="image_Four"
                       />
                     </div>
                   </div>
                   <div className="flex flex-col gap-[7px] items-center justify-start w-[49%] sm:w-full">
                     <div className="flex flex-row gap-3.5  items-center justify-between">
-                      <Img
+                      <Image
                         className="h-[25px] w-[25px]"
-                        src="images/img_radiogroupitem.svg"
+                        src="/images/img_radiogroupitem.svg"
                         alt="radiogroupitem"
+                        height={25}
+                        width={25}
                       />
-                      <Img
+                      <Image
                         className="h-[25px] w-[25px]"
-                        src="images/img_radiogroupitem.svg"
+                        src="/images/img_radiogroupitem.svg"
                         alt="radiogroupitem_One"
+                        height={25}
+                        width={25}
                       />
-                      <Img
+                      <Image
                         className="h-[25px] w-[25px]"
-                        src="images/img_radiogroupitem.svg"
+                        src="/images/img_radiogroupitem.svg"
                         alt="radiogroupitem_Two"
+                        width={25}
+                        height={25}
                       />
-                      <Img
+                      <Image
                         className="h-[25px] w-[25px]"
-                        src="images/img_radiogroupitem.svg"
+                        src="/images/img_radiogroupitem.svg"
                         alt="radiogroupitem_Three"
+                        width={25}
+                        height={25}
                       />
-                      <Img
+                      <Image
                         className="h-[25px] w-[25px]"
-                        src="images/img_radiogroupitem.svg"
+                        src="/images/img_radiogroupitem.svg"
                         alt="radiogroupitem_Four"
+                        width={25}
+                        height={25}
                       />
                     </div>
                     <Text
@@ -144,10 +169,12 @@ const Home = () => {
                     backgroundImage: "url('images/img_divanttypography.svg')",
                   }}
                 >
-                  <Img
+                  <Image
                     className="h-[360px+] sm:h-auto mb-[116px] object-contain w-[67%]"
-                    src="images/img_image_360x327.png"
+                    src="/images/img_image_360x327.png"
                     alt="image_Eleven"
+                    height={360}
+                    width={327}
                   />
                 </div>
               </div>
@@ -206,16 +233,20 @@ const Home = () => {
                 >
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_purple_200.svg"
+                        src="/images/img_divanttypography_purple_200.svg"
                         alt="divanttypograph"
+                        height={116}
+                        width={300}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_118x118.png"
+                          src="/images/img_image_118x118.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -244,16 +275,20 @@ const Home = () => {
                   </div>
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_red_400.svg"
+                        src="/images/img_divanttypography_red_400.svg"
                         alt="divanttypograph"
+                        height={116}
+                        width={300}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_3.png"
+                          src="/images/img_image_3.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -278,16 +313,20 @@ const Home = () => {
                   </div>
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_blue_a100.svg"
+                        src="/images/img_divanttypography_blue_a100.svg"
                         alt="divanttypograph"
+                        height={116}
+                        width={300}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_4.png"
+                          src="/images/img_image_4.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -316,16 +355,20 @@ const Home = () => {
                   </div>
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_green_400.svg"
+                        src="/images/img_divanttypography_green_400.svg"
                         alt="divanttypograph"
+                        width={300}
+                        height={116}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_5.png"
+                          src="/images/img_image_5.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -361,16 +404,20 @@ const Home = () => {
                 >
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_blue_a100.svg"
+                        src="/images/img_divanttypography_blue_a100.svg"
                         alt="divanttypograph"
+                        height={116}
+                        width={300}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_4.png"
+                          src="/images/img_image_4.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -399,16 +446,20 @@ const Home = () => {
                   </div>
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_green_400.svg"
+                        src="/images/img_divanttypography_green_400.svg"
                         alt="divanttypograph"
+                        width={300}
+                        height={116}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_5.png"
+                          src="/images/img_image_5.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -437,16 +488,20 @@ const Home = () => {
                   </div>
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_purple_200.svg"
+                        src="/images/img_divanttypography_purple_200.svg"
                         alt="divanttypograph"
+                        width={300}
+                        height={116}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_118x118.png"
+                          src="/images/img_image_118x118.png"
                           alt="image_One"
+                          height={118}
+                          width={118}
                         />
                       </div>
                     </div>
@@ -475,16 +530,20 @@ const Home = () => {
                   </div>
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_red_400.svg"
+                        src="/images/img_divanttypography_red_400.svg"
                         alt="divanttypograph"
+                        width={300}
+                        height={116}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_3.png"
+                          src="/images/img_image_3.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -516,16 +575,20 @@ const Home = () => {
                 >
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_red_400.svg"
+                        src="/images/img_divanttypography_red_400.svg"
                         alt="divanttypograph"
+                        width={300}
+                        height={116}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_3.png"
+                          src="/images/img_image_3.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -550,16 +613,20 @@ const Home = () => {
                   </div>
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_blue_a100.svg"
+                        src="/images/img_divanttypography_blue_a100.svg"
                         alt="divanttypograph"
+                        width={300}
+                        height={116}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_4.png"
+                          src="/images/img_image_4.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -588,16 +655,20 @@ const Home = () => {
                   </div>
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_green_400.svg"
+                        src="/images/img_divanttypography_green_400.svg"
                         alt="divanttypograph"
+                        width={300}
+                        height={116}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_5.png"
+                          src="/images/img_image_5.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -626,16 +697,20 @@ const Home = () => {
                   </div>
                   <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
                     <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Img
+                      <Image
                         className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="images/img_divanttypography_purple_200.svg"
+                        src="/images/img_divanttypography_purple_200.svg"
                         alt="divanttypograph"
+                        width={300}
+                        height={116}
                       />
                       <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Img
+                        <Image
                           className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="images/img_image_118x118.png"
+                          src="/images/img_image_118x118.png"
                           alt="image_One"
+                          width={118}
+                          height={118}
                         />
                       </div>
                     </div>
@@ -704,20 +779,24 @@ const Home = () => {
             <div className="flex md:flex-1 flex-col items-center justify-start w-[42%] md:w-full">
               <div className="flex flex-col items-center justify-start w-full">
                 <div className="flex flex-col items-center justify-start w-full">
-                  <Img
+                  <Image
                     className="h-[449px] md:h-auto object-cover w-full"
-                    src="images/img_clippathgroup.png"
+                    src="/images/img_clippathgroup.png"
                     alt="clippathgroup"
+                    width={449}
+                    height={449}
                   />
                 </div>
               </div>
             </div>
           </div>
           <div className="flex md:flex-col flex-row md:gap-[50px] items-center justify-between w-full">
-            <Img
+            <Image
               className="h-[503px]"
-              src="images/img_divantcol.svg"
+              src="/images/img_divantcol.svg"
               alt="divantcol"
+              width={503}
+              height={503}
             />
             <div className="flex flex-col items-center justify-start">
               <div className="flex flex-col items-center justify-start p-3.5 w-full"></div>
@@ -1068,38 +1147,46 @@ const Home = () => {
         <div className="lg:absolute bottom-[14%] overflow-clip flex md:flex-col flex-row gap-2.5 inset-x-[0] items-center justify-center mx-auto w-[64%]">
           <div className="flex flex-col gap-5 items-center justify-start w-[68%] md:w-full">
             <div className="flex md:flex-col flex-row md:gap-5 items-center justify-evenly w-full">
-              <Img
+              <Image
                 className="h-[280px]"
-                src="images/img_divantcol_red_100.svg"
+                src="/images/img_divantcol_red_100.svg"
                 alt="divantcol_One"
+                height={300}
+                width={300}
               />
               <div className="flex md:flex-1 flex-col items-center justify-start w-[63%] md:w-full">
                 <div className="flex flex-col items-center justify-start w-[97%] md:w-full">
                   <div className="flex flex-col items-center justify-start w-full">
                     <div className="flex flex-col items-center justify-start w-full">
-                      <Img
+                      <Image
                         className="h-[280px] md:h-auto object-cover w-full"
-                        src="images/img_clippathgroup_280x488.png"
+                        src="/images/img_clippathgroup_280x488.png"
                         alt="clippathgroup_One"
+                        height={300}
+                        width={300}
                       />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <Img
+            <Image
               className="h-[289px]"
-              src="images/img_divantrow.svg"
+              src="/images/img_divantrow.svg"
               alt="divantrow"
+              height={300}
+              width={300}
             />
           </div>
           <div className="flex flex-col items-center justify-start w-[32%] md:w-full">
             <div className="flex flex-col items-center justify-start w-full">
               <div className="flex flex-col items-center justify-start w-full">
-                <Img
+                <Image
                   className="h-[586px] md:h-auto object-cover w-full z-0"
-                  src="images/img_clippathgroup_586x386.png"
+                  src="/images/img_clippathgroup_586x386.png"
                   alt="clippathgroup_Two"
+                  height={589}
+                  width={300}
                 />
               </div>
             </div>
@@ -1119,10 +1206,12 @@ const Home = () => {
               <div className="md:gap-5 gap-[30px] grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
                 <div className="bg-white-A700_e5 flex flex-1 flex-col gap-[9px] items-center justify-start pb-8 rounded-[40px] w-full">
                   <div className="flex flex-col gap-[19px] items-start justify-start p-6 sm:px-5 w-full">
-                    <Img
+                    <Image
                       className="h-[30px] ml-1 md:ml-[0] w-[30px]"
-                      src="images/img_megaphone.svg"
+                      src="/images/img_megaphone.svg"
                       alt="megaphone"
+                      height={30}
+                      width={30}
                     />
                     <div className="flex flex-col items-start justify-start ml-1 md:ml-[0] pb-2.5 pr-2.5">
                       <Text
@@ -1140,10 +1229,12 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="flex flex-row gap-3.5 items-center justify-start md:pr-10 sm:pr-5 pr-[103px] w-[86%] pl-5 md:w-full">
-                    <Img
+                    <Image
                       className="h-12 md:h-auto rounded-[50%] w-12"
-                      src="images/img_image_48x48.png"
+                      src="/images/img_image_48x48.png"
                       alt="image"
+                      height={48}
+                      width={48}
                     />
                     <div className="flex flex-col items-start justify-start">
                       <Text
@@ -1163,10 +1254,12 @@ const Home = () => {
                 </div>
                 <div className="bg-white-A700_e5 flex flex-1 flex-col gap-[9px] items-center justify-start pb-8 rounded-[40px] w-full">
                   <div className="flex flex-col gap-[19px] items-start justify-start p-6 sm:px-5 w-full">
-                    <Img
+                    <Image
                       className="h-[30px] ml-1 md:ml-[0] w-[30px]"
-                      src="images/img_megaphone.svg"
+                      src="/images/img_megaphone.svg"
                       alt="megaphone"
+                      height={30}
+                      width={30}
                     />
                     <div className="flex flex-col items-start justify-start ml-1 md:ml-[0] pb-[38px] sm:pr-5 pr-[38px]">
                       <Text
@@ -1182,10 +1275,12 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="flex flex-row gap-3.5 items-center justify-start md:pr-10 sm:pr-5 pr-[153px] w-[86%] pl-5 md:w-full">
-                    <Img
+                    <Image
                       className="h-12 md:h-auto rounded-[50%] w-12"
-                      src="images/img_image_6.png"
+                      src="/images/img_image_6.png"
                       alt="image"
+                      height={48}
+                      width={48}
                     />
                     <div className="flex flex-col items-start justify-start">
                       <Text
@@ -1205,10 +1300,12 @@ const Home = () => {
                 </div>
                 <div className="bg-white-A700_e5 flex flex-1 flex-col gap-[9px] items-center justify-start pb-8 rounded-[40px] w-full">
                   <div className="flex flex-col gap-[19px] items-start justify-start p-6 sm:px-5 w-full">
-                    <Img
+                    <Image
                       className="h-[30px] ml-1 md:ml-[0] w-[30px]"
-                      src="images/img_megaphone.svg"
+                      src="/images/img_megaphone.svg"
                       alt="megaphone"
+                      height={30}
+                      width={30}
                     />
                     <div className="flex flex-col items-center justify-start ml-1 md:ml-[0] pb-[9px] pr-[9px]">
                       <Text
@@ -1226,10 +1323,12 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="flex flex-row gap-3.5 items-center justify-start md:pr-10 sm:pr-5 pr-[52px] w-[86%] pl-5 md:w-full">
-                    <Img
+                    <Image
                       className="h-12 md:h-auto rounded-[50%] w-12"
-                      src="images/img_image_7.png"
+                      src="/images/img_image_7.png"
                       alt="image"
+                      height={48}
+                      width={48}
                     />
                     <div className="flex flex-col items-start justify-start">
                       <Text
@@ -1249,10 +1348,12 @@ const Home = () => {
                 </div>
                 <div className="bg-white-A700_e5 flex flex-1 flex-col gap-[9px] items-center justify-start pb-8 rounded-[40px] w-full">
                   <div className="flex flex-col gap-[19px] items-start justify-start p-6 sm:px-5 w-full">
-                    <Img
+                    <Image
                       className="h-[30px] ml-1 md:ml-[0] w-[30px]"
-                      src="images/img_megaphone.svg"
+                      src="/images/img_megaphone.svg"
                       alt="megaphone"
+                      height={30}
+                      width={30}
                     />
                     <div className="flex flex-col items-start justify-start ml-1 md:ml-[0] pb-4 pr-4">
                       <Text
@@ -1268,10 +1369,12 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="flex flex-row gap-3.5 items-center justify-start md:pr-10 sm:pr-5 pr-[140px] w-[86%] pl-5 md:w-full">
-                    <Img
+                    <Image
                       className="h-12 md:h-auto rounded-[50%] w-12"
-                      src="images/img_image_8.png"
+                      src="/images/img_image_8.png"
                       alt="image"
+                      height={48}
+                      width={48}
                     />
                     <div className="flex flex-col items-start justify-start">
                       <Text
@@ -1291,10 +1394,12 @@ const Home = () => {
                 </div>
                 <div className="bg-white-A700_e5 flex flex-1 flex-col gap-[9px] items-center justify-start pb-8 rounded-[40px] w-full">
                   <div className="flex flex-col gap-[19px] items-start justify-start p-6 sm:px-5 w-full">
-                    <Img
+                    <Image
                       className="h-[30px] ml-1 md:ml-[0] w-[30px]"
-                      src="images/img_megaphone.svg"
+                      src="/images/img_megaphone.svg"
                       alt="megaphone"
+                      height={30}
+                      width={30}
                     />
                     <div className="flex flex-col items-start justify-start ml-1 md:ml-[0] pb-2.5 pr-2.5">
                       <Text
@@ -1312,10 +1417,12 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="flex flex-row gap-3.5 items-center justify-start md:pr-10 pr-24 sm:pr-5 w-[86%] pl-5  md:w-full">
-                    <Img
+                    <Image
                       className="h-12 md:h-auto rounded-[50%] w-12"
-                      src="images/img_image_9.png"
+                      src="/images/img_image_9.png"
                       alt="image"
+                      height={48}
+                      width={48}
                     />
                     <div className="flex flex-col items-start justify-start">
                       <Text
@@ -1335,10 +1442,12 @@ const Home = () => {
                 </div>
                 <div className="bg-white-A700_e5 flex flex-1 flex-col items-center justify-start pb-[22px] rounded-[40px] w-full">
                   <div className="flex flex-col gap-[19px] items-start justify-start p-6 sm:px-5 w-full">
-                    <Img
+                    <Image
                       className="h-[30px] ml-1 md:ml-[0] w-[30px]"
-                      src="images/img_megaphone.svg"
+                      src="/images/img_megaphone.svg"
                       alt="megaphone"
+                      height={30}
+                      width={30}
                     />
                     <div className="flex flex-col items-start justify-start ml-1 md:ml-[0]">
                       <Text
@@ -1358,10 +1467,12 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="flex flex-row gap-3.5 items-center justify-start sm:pr-5 pr-[31px] w-[86%] pl-5  md:w-full">
-                    <Img
+                    <Image
                       className="h-12 md:h-auto rounded-[50%] w-12"
-                      src="images/img_image_10.png"
+                      src="/images/img_image_10.png"
                       alt="image"
+                      height={48}
+                      width={48}
                     />
                     <div className="flex flex-col items-start justify-start">
                       <Text
@@ -1416,22 +1527,6 @@ const Home = () => {
                 </Text>
               </div>
               <div className="flex flex-col gap-6 items-start justify-end md:pr-10 pr-12 sm:pr-5 pt-12 w-full">
-                {/* <Input
-                name="spanantinputaff"
-                placeholder="Your LinkedIn profile link"
-                className="leading-[normal] p-0 placeholder:text-black-900_3f text-[19.22px] text-left w-full"
-                wrapClassName="flex w-[70%]"
-                suffix={
-                  <Img
-                    className="ml-[35px] my-auto"
-                    src="images/img_spanantinputsuffix.svg"
-                    alt="span.ant-input-suffix"
-                  />
-                }
-                shape="round"
-                color="gray_900_23"
-                variant="outline"
-              ></Input> */}
                 <Text
                   className="text-black-900_e0 text-xl"
                   size="txtOxygenRegular20Black900e0"
@@ -1449,22 +1544,28 @@ const Home = () => {
               <div className="bg-black-900 flex flex-col items-center justify-start w-full">
                 <div className="bg-black-900 h-[599px] relative w-full">
                   <div className="h-[599px] m-auto w-full">
-                    <Img
+                    <Image
                       className="h-[599px] m-auto object-cover w-full"
-                      src="images/img_divytpcuedth.png"
+                      src="/images/img_divytpcuedth.png"
                       alt="divytpcuedth"
+                      height={599}
+                      width={800}
                     />
-                    <Img
+                    <Image
                       className="absolute bottom-[39%] h-[90px] inset-x-[0] mx-auto"
-                      src="images/img_settings.svg"
+                      src="/images/img_settings.svg"
                       alt="settings"
+                      height={90}
+                      width={90}
                     />
                   </div>
                   <div className="absolute h-[349px] inset-x-[0] mx-auto top-[0] w-full">
-                    <Img
+                    <Image
                       className="h-[349px] m-auto object-cover w-full"
-                      src="images/img_divytpgradienttop.png"
+                      src="/images/img_divytpgradienttop.png"
                       alt="divytpgradientt"
+                      height={349}
+                      width={800}
                     />
                     <div className="absolute flex sm:flex-col flex-row sm:gap-5 inset-x-[0] items-center justify-evenly mx-auto pb-0.5 pl-0.5 top-[0] w-[97%]">
                       <div className="flex flex-col items-start justify-start">
@@ -1475,17 +1576,21 @@ const Home = () => {
                           Impact your audience
                         </Text>
                       </div>
-                      <Img
+                      <Image
                         className="h-10"
-                        src="images/img_buttonshare.svg"
+                        src="/images/img_buttonshare.svg"
                         alt="buttonshare"
+                        width={72}
+                        height={72}
                       />
                     </div>
                     <div className="absolute flex flex-row gap-2 inset-x-[0] items-center justify-start mx-auto p-[5px] top-[12%] w-[97%]">
-                      <Img
+                      <Image
                         className="h-6 md:h-auto rounded-[50%] w-6"
-                        src="images/img_linkphotoimage.png"
+                        src="/images/img_linkphotoimage.png"
                         alt="linkphotoimage"
+                        height={48}
+                        width={48}
                       />
                       <div className="flex flex-col items-center justify-start">
                         <Text
@@ -1505,19 +1610,23 @@ const Home = () => {
             <div className="flex md:flex-1 flex-col items-center justify-start w-[32%] md:w-full">
               <div className="flex flex-col items-center justify-start py-0.5 w-full">
                 <div className="flex flex-col items-center justify-start w-full">
-                  <Img
+                  <Image
                     className="h-[385px] md:h-auto object-cover w-full"
-                    src="images/img_clippathgroup_385x356.png"
+                    src="/images/img_clippathgroup_385x356.png"
                     alt="clippathgroup_Three"
+                    height={385}
+                    width={356}
                   />
                 </div>
               </div>
             </div>
             <div className="bg-white-A700 flex md:flex-1 flex-col items-start justify-start p-[41px] md:px-10 sm:px-5 rounded-[48px] w-[65%] md:w-full">
-              <Img
+              <Image
                 className="h-[103px] w-[110px] md:h-[100px] md:ml-[0] ml-[13px] object-cover  "
-                src="images/img_image_103x110.png"
+                src="/images/img_image_103x110.png"
                 alt="image_Eighteen"
+                height={103}
+                width={110}
               />
               <Text
                 className="md:ml-[0] ml-[13px] mt-[57px] text-[19px] text-gray-900_02"
