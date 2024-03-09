@@ -8,7 +8,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { ImQuotesLeft } from "react-icons/im";
 import { Button } from "@/components";
 import { FaLinkedin } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaInstagram } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import Link from "next/link";
 import { IoMdLink } from "react-icons/io";
@@ -107,8 +107,8 @@ const Right = ({ data, service, feedback }) => {
   }, [data, profile, service, serviceData]);
   return (
     <div className=" bg-[#efece3]  w-full py-16 7md:px-[4%] px-[8.33%] flex flex-col gap-5 ">
-      {/* <div className="mb-10 flex items-center flex-wrap justify-start p-3.5 gap-5 flex-row">
-        {profile?.featured.map((item, index) => (
+      <div className="mb-10 flex items-center flex-wrap justify-start p-3.5 gap-5 flex-row">
+        {profile?.featured?.map((item, index) => (
           <Link
             href={item.link}
             key={index}
@@ -133,7 +133,7 @@ const Right = ({ data, service, feedback }) => {
             </div>
           </Link>
         ))}
-      </div> */}
+      </div>
       <div className="flex flex-col gap-y-[32px] w-full">
         <div className="flex w-full items-center justify-center">
           <div
@@ -167,45 +167,58 @@ const Right = ({ data, service, feedback }) => {
             Package
           </div>
         </div>
-        {/* <div className="w-full">
+        <div className="w-full">
           {active == "all" && (
             <div className="flex flex-wrap w-full gap-5">
-              {service.map((item, index) => (
+              {profile?.data?.services.map((item, index) => (
                 <div
                   key={index}
                   className="bg-[#ffffff]/[95%] shadow-md rounded-[32px] p-5 space-y-4 h-max  md:w-full lg:max-w-[436px] flex-grow"
                 >
                   <div className="flex gap-2.5 items-start justify-start">
-                    {item.rating && (
-                      <div className="bg-[#f3f3f7] text-base px-3 py-1.5 text-[#141414] flex rounded-[24px] font-extrabold items-center gap-2 justify-center text-center  w-max ">
-                        <FaStar />
-                        {item?.rating}
+                    {item?.tags?.map((tag, index) => (
+                      <div key={index}>
+                        {tag.key == "average_rating" && (
+                          <div className="bg-[#f3f3f7] text-base px-3 py-1.5 text-[#141414] flex rounded-[24px] font-extrabold items-center gap-2 justify-center text-center  w-max ">
+                            <FaStar />
+                            {tag.value}
+                          </div>
+                        )}
+                        {tag.key == "best_deal" && (
+                          <div
+                            className={`
+                         
+                             bg-[#f3e2fb] text-[#8231a7]  rounded-[24px] font-bold
+                           text-base px-5 py-1.5`}
+                          >
+                            Best Deal
+                          </div>
+                        )}{" "}
+                        {tag.key == "popular" && (
+                          <div
+                            className={`
+                         
+                            bg-[#e7f2ff] text-[#2d4fc5]  rounded-[24px] font-bold
+                           text-base px-5 py-1.5`}
+                          >
+                            Popular
+                          </div>
+                        )}
                       </div>
-                    )}
-                    <div
-                      className={`${
-                        item.dealType === "Best Deal" &&
-                        "bg-[#f3e2fb] text-[#8231a7]  rounded-[24px] font-bold"
-                      } ${
-                        item.dealType === "Popular" &&
-                        "bg-[#e7f2ff] text-[#2d4fc5]  rounded-[24px] font-bold"
-                      } text-base px-5 py-1.5`}
-                    >
-                      {item.dealType}
-                    </div>
+                    ))}
                   </div>
                   <div className="pb-7 space-y-3">
                     <h2 className=" text-[#000000]/[95%] text-2xl font-extrabold">
                       {item.title}
                     </h2>
                     <p className="text-base text-[#5c5c5c] font-medium">
-                      {item.desc}
+                      {item.short_custom_description}
                     </p>
                   </div>
                   <div className="rounded-[18px] bg-[#efeff0] text-sm flex items-center justify-between py-3.5 px-4 ">
                     <div className="gap-3 flex ">
                       <div className="text-3xl text-[#000000]/[88%] flex items-center justify-center ">
-                        {item.type == "Package" ? (
+                        {item.type == 4 ? (
                           <BiSolidPackage />
                         ) : (
                           <FaCalendarAlt />
@@ -213,15 +226,29 @@ const Right = ({ data, service, feedback }) => {
                       </div>
                       <div className="flex flex-col">
                         <span className="font-extrabold text-base text-[#000000]/[88%]">
-                          {item.time}
+                          {item.type == 4 && "Package"}
+                          {item.type == 5 && "Digital Product"}
+                          {item.type == 3 &&
+                            new Date(item.specific_date).toDateString()}
+                          {item.type == 1 && item.short_description}
                         </span>
                         <span className="font-medium text-sm text-[#5c5c5c]">
-                          {item.type}
+                          {item?.package_services.length > 0 && (
+                            <>
+                              {item?.package_services?.length}{" "}
+                              {item?.package_services?.length > 1
+                                ? "Products"
+                                : "Product"}
+                            </>
+                          )}
+                          {item.type == 3 &&
+                            new Date(item.specific_date).toTimeString()}
                         </span>
                       </div>
                     </div>
                     <div className="px-4 text-lg font-semibold text-[#141414] hover:bg-[#141414] hover:text-[#fff] border py-2 border-[#141414] rounded-[24px] cursor-pointer flex items-center gap-1.5">
-                      {item.price}
+                      {item?.currency?.display_text}
+                      {item.total_charge ? item.total_charge : item?.charge}
                       <FaArrowRight />
                     </div>
                   </div>
@@ -231,44 +258,58 @@ const Right = ({ data, service, feedback }) => {
           )}
           {active == "call" && (
             <div className="flex flex-wrap w-full gap-5">
-              {service.map((item, index) => (
+              {profile?.data?.services.map((item, index) => (
                 <>
-                  {item.category == "call" && (
+                  {item.type === 1 && (
                     <div
-                      key={index}
                       className="bg-[#ffffff]/[95%] shadow-md rounded-[32px] p-5 space-y-4 h-max  md:w-full lg:max-w-[436px] flex-grow"
+                      key={index}
                     >
+                      {" "}
                       <div className="flex gap-2.5 items-start justify-start">
-                        {item.rating && (
-                          <div className="bg-[#f3f3f7] text-base px-3 py-1.5 text-[#141414] flex rounded-[24px] font-extrabold items-center gap-2 justify-center text-center  w-max ">
-                            <FaStar />
-                            {item?.rating}
+                        {item?.tags?.map((tag, index) => (
+                          <div key={index}>
+                            {tag.key == "average_rating" && (
+                              <div className="bg-[#f3f3f7] text-base px-3 py-1.5 text-[#141414] flex rounded-[24px] font-extrabold items-center gap-2 justify-center text-center  w-max ">
+                                <FaStar />
+                                {tag.value}
+                              </div>
+                            )}
+                            {tag.key == "best_deal" && (
+                              <div
+                                className={`
+                              
+                                  bg-[#f3e2fb] text-[#8231a7]  rounded-[24px] font-bold
+                                text-base px-5 py-1.5`}
+                              >
+                                Best Deal
+                              </div>
+                            )}{" "}
+                            {tag.key == "popular" && (
+                              <div
+                                className={`
+                              
+                                 bg-[#e7f2ff] text-[#2d4fc5]  rounded-[24px] font-bold
+                                text-base px-5 py-1.5`}
+                              >
+                                Popular
+                              </div>
+                            )}
                           </div>
-                        )}
-                        <div
-                          className={`${
-                            item.dealType === "Best Deal" &&
-                            "bg-[#f3e2fb] text-[#8231a7]  rounded-[24px] font-bold"
-                          } ${
-                            item.dealType === "Popular" &&
-                            "bg-[#e7f2ff] text-[#2d4fc5]  rounded-[24px] font-bold"
-                          } text-base px-5 py-1.5`}
-                        >
-                          {item.dealType}
-                        </div>
+                        ))}
                       </div>
                       <div className="pb-7 space-y-3">
                         <h2 className=" text-[#000000]/[95%] text-2xl font-extrabold">
                           {item.title}
                         </h2>
                         <p className="text-base text-[#5c5c5c] font-medium">
-                          {item.desc}
+                          {item.short_custom_description}
                         </p>
                       </div>
                       <div className="rounded-[18px] bg-[#efeff0] text-sm flex items-center justify-between py-3.5 px-4 ">
                         <div className="gap-3 flex ">
                           <div className="text-3xl text-[#000000]/[88%] flex items-center justify-center ">
-                            {item.type == "Package" ? (
+                            {item.type == 4 ? (
                               <BiSolidPackage />
                             ) : (
                               <FaCalendarAlt />
@@ -276,15 +317,29 @@ const Right = ({ data, service, feedback }) => {
                           </div>
                           <div className="flex flex-col">
                             <span className="font-extrabold text-base text-[#000000]/[88%]">
-                              {item.time}
+                              {item.type == 4 && "Package"}
+                              {item.type == 5 && "Digital Product"}
+                              {item.type == 3 &&
+                                new Date(item.specific_date).toDateString()}
+                              {item.type == 1 && item.short_description}
                             </span>
                             <span className="font-medium text-sm text-[#5c5c5c]">
-                              {item.type}
+                              {item?.package_services.length > 0 && (
+                                <>
+                                  {item?.package_services?.length}{" "}
+                                  {item?.package_services?.length > 1
+                                    ? "Products"
+                                    : "Product"}
+                                </>
+                              )}
+                              {item.type == 3 &&
+                                new Date(item.specific_date).toTimeString()}
                             </span>
                           </div>
                         </div>
                         <div className="px-4 text-lg font-semibold text-[#141414] hover:bg-[#141414] hover:text-[#fff] border py-2 border-[#141414] rounded-[24px] cursor-pointer flex items-center gap-1.5">
-                          {item.price}
+                          {item?.currency?.display_text}
+                          {item.total_charge ? item.total_charge : item?.charge}
                           <FaArrowRight />
                         </div>
                       </div>
@@ -296,44 +351,57 @@ const Right = ({ data, service, feedback }) => {
           )}
           {active == "package" && (
             <div className="flex flex-wrap w-full gap-5">
-              {service.map((item, index) => (
+              {profile?.data?.services.map((item, index) => (
                 <>
-                  {item.category == "Package" && (
+                  {item.type === 4 && (
                     <div
-                      key={index}
                       className="bg-[#ffffff]/[95%] shadow-md rounded-[32px] p-5 space-y-4 h-max  md:w-full lg:max-w-[436px] flex-grow"
+                      key={index}
                     >
                       <div className="flex gap-2.5 items-start justify-start">
-                        {item.rating && (
-                          <div className="bg-[#f3f3f7] text-base px-3 py-1.5 text-[#141414] flex rounded-[24px] font-extrabold items-center gap-2 justify-center text-center  w-max ">
-                            <FaStar />
-                            {item?.rating}
+                        {item?.tags?.map((tag, index) => (
+                          <div key={index}>
+                            {tag.key == "average_rating" && (
+                              <div className="bg-[#f3f3f7] text-base px-3 py-1.5 text-[#141414] flex rounded-[24px] font-extrabold items-center gap-2 justify-center text-center  w-max ">
+                                <FaStar />
+                                {tag.value}
+                              </div>
+                            )}
+                            {tag.key == "best_deal" && (
+                              <div
+                                className={`
+                              
+                                  bg-[#f3e2fb] text-[#8231a7]  rounded-[24px] font-bold
+                                text-base px-5 py-1.5`}
+                              >
+                                Best Deal
+                              </div>
+                            )}{" "}
+                            {tag.key == "popular" && (
+                              <div
+                                className={`
+                              
+                                 bg-[#e7f2ff] text-[#2d4fc5]  rounded-[24px] font-bold
+                                text-base px-5 py-1.5`}
+                              >
+                                Popular
+                              </div>
+                            )}
                           </div>
-                        )}
-                        <div
-                          className={`${
-                            item.dealType === "Best Deal" &&
-                            "bg-[#f3e2fb] text-[#8231a7]  rounded-[24px] font-bold"
-                          } ${
-                            item.dealType === "Popular" &&
-                            "bg-[#e7f2ff] text-[#2d4fc5]  rounded-[24px] font-bold"
-                          } text-base px-5 py-1.5`}
-                        >
-                          {item.dealType}
-                        </div>
+                        ))}
                       </div>
                       <div className="pb-7 space-y-3">
                         <h2 className=" text-[#000000]/[95%] text-2xl font-extrabold">
                           {item.title}
                         </h2>
                         <p className="text-base text-[#5c5c5c] font-medium">
-                          {item.desc}
+                          {item.short_custom_description}
                         </p>
                       </div>
                       <div className="rounded-[18px] bg-[#efeff0] text-sm flex items-center justify-between py-3.5 px-4 ">
                         <div className="gap-3 flex ">
                           <div className="text-3xl text-[#000000]/[88%] flex items-center justify-center ">
-                            {item.type == "Package" ? (
+                            {item.type == 4 ? (
                               <BiSolidPackage />
                             ) : (
                               <FaCalendarAlt />
@@ -341,15 +409,29 @@ const Right = ({ data, service, feedback }) => {
                           </div>
                           <div className="flex flex-col">
                             <span className="font-extrabold text-base text-[#000000]/[88%]">
-                              {item.time}
+                              {item.type == 4 && "Package"}
+                              {item.type == 5 && "Digital Product"}
+                              {item.type == 3 &&
+                                new Date(item.specific_date).toDateString()}
+                              {item.type == 1 && item.short_description}
                             </span>
                             <span className="font-medium text-sm text-[#5c5c5c]">
-                              {item.type}
+                              {item?.package_services.length > 0 && (
+                                <>
+                                  {item?.package_services?.length}{" "}
+                                  {item?.package_services?.length > 1
+                                    ? "Products"
+                                    : "Product"}
+                                </>
+                              )}
+                              {item.type == 3 &&
+                                new Date(item.specific_date).toTimeString()}
                             </span>
                           </div>
                         </div>
                         <div className="px-4 text-lg font-semibold text-[#141414] hover:bg-[#141414] hover:text-[#fff] border py-2 border-[#141414] rounded-[24px] cursor-pointer flex items-center gap-1.5">
-                          {item.price}
+                          {item?.currency?.display_text}
+                          {item.total_charge ? item.total_charge : item?.charge}
                           <FaArrowRight />
                         </div>
                       </div>
@@ -359,7 +441,7 @@ const Right = ({ data, service, feedback }) => {
               ))}
             </div>
           )}
-        </div> */}
+        </div>
       </div>
       <div className="my-10">
         <div>
@@ -378,42 +460,40 @@ const Right = ({ data, service, feedback }) => {
             />
           </div>
           <div className="bg-[#ffffff]/[95%] rounded-[32px] text-[32px] leading-[32px] font-bold max-w-[200px] flex-grow-1 flex flex-col items-center justify-center text-[#000000]/[95%] px-10 w-auto min-h-[150px]">
-            <span>{profile?.rating}</span>
+            <span>{profile?.data?.total_ratings}</span>
             <span className="text-base text-[#666b60] font-medium">
               {profile?.ratings} RATINGS
             </span>
           </div>
           <div className="bg-[#ffffff]/[95%] rounded-[32px] text-[32px] leading-[32px] font-bold max-w-[200px] flex-grow-1 flex flex-col items-center justify-center text-[#000000]/[95%] px-10 w-auto min-h-[150px]">
-            <span>{profile?.testimonials}</span>
+            <span>{profile?.data?.testimonials_count}</span>
             <span className="text-base text-[#666b60] font-medium">
               TESTIMONIALS
             </span>
           </div>
         </div>
         <div className="flex gap-5 flex-wrap mt-5 h-full  justify-center ">
-          {feedback.slice(0, 4).map((item, index) => (
+          {profile?.data?.testimonials?.slice(0, 4)?.map((item, index) => (
             <div
               key={index}
-              className="px-[24px] pt-[18px] pb-[24px] text-[#000000]/[88%] bg-[#fdfbf9] rounded-[32px] gap-5 flex flex-col shadow-md min-h-full h-auto lg:max-w-[460px] cursor-pointer"
+              className="px-[24px] pt-[18px] pb-[24px] text-[#000000]/[88%] bg-[#fdfbf9] rounded-[32px] gap-5 flex flex-col shadow-md min-h-full h-auto lg:max-w-[460px] cursor-pointer w-full"
             >
               <div className="text-[#efe3d2] text-[34px] ">
                 <ImQuotesLeft />
               </div>
               <div className="flex justify-between flex-col gap-5 h-full">
-                <div className="font-normal text-[#000000]">
-                  {item?.feedback}
-                </div>
+                <div className="font-normal text-[#000000]">{item?.text}</div>
                 <div className="font-bold text-base text-[#000000]/[88%]">
-                  {item?.person}
+                  {item?.follower_name}
                 </div>
               </div>
             </div>
           ))}
-          <div className="w-full flex items-center justify-center pr-28 mt-5">
+          {/* <div className="w-full flex items-center justify-center pr-28 mt-5">
             <Button className="font-bold shadow-md  rounded-md">
               Show all {profile?.testimonials} reviews
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
       <div>
@@ -423,22 +503,44 @@ const Right = ({ data, service, feedback }) => {
           </h2>
         </div>
         <div className="flex gap-[26px] flex-wrap">
-          {/* {profile?.social.map((item) => ( */}
-          {/* <Link href={item.link} key={item.title}>
-              <div className="p-[22px] text-4xl bg-[#ffffff]/[95%] shadow-md rounded-[16px] text-black-900">
-                {item?.title == "linkedIn" && <FaLinkedin />}
-                {item?.title == "github" && <FaGithub />}
-                {item?.title == "youtube" && <FaYoutube />}
-                {item?.title == "link" && <IoMdLink />}
-              </div>
-            </Link> */}
-          {/* ))} */}
+          {profile?.data?.social_urls.map((item) => (
+            <div key={item?.name}>
+              {item.name == "linkedin" && (
+                <Link href={item.link}>
+                  <div className="p-[22px] text-4xl bg-[#ffffff]/[95%] shadow-md rounded-[16px] text-black-900">
+                    <FaLinkedin />
+                  </div>
+                </Link>
+              )}{" "}
+              {item.name == "instgarm" && (
+                <Link href={item.link}>
+                  <div className="p-[22px] text-4xl bg-[#ffffff]/[95%] shadow-md rounded-[16px] text-black-900">
+                    <FaInstagram />
+                  </div>
+                </Link>
+              )}
+              {item.name == "github" && (
+                <Link href={item.link}>
+                  <div className="p-[22px] text-4xl bg-[#ffffff]/[95%] shadow-md rounded-[16px] text-black-900">
+                    <FaGithub />
+                  </div>
+                </Link>
+              )}
+              {item.name == "custom" && (
+                <Link href={item.link}>
+                  <div className="p-[22px] text-4xl bg-[#ffffff]/[95%] shadow-md rounded-[16px] text-black-900">
+                    <IoMdLink />
+                  </div>
+                </Link>
+              )}
+            </div>
+          ))}
         </div>
         <div
           className="flex flex-col gap-5 my-10 font-medium text-[#000000]/[88%] leading-[45px] text-lg
         "
         >
-          <p>{profile?.aboutMe}</p>
+          <p>{profile?.data?.description}</p>
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ const Page = () => {
   const fetchProfileData = useCallback(async () => {
     try {
       const { data: profile, error } = await supabase
-        .from("profile")
+        .from("top")
         .select("*")
         .eq("username", pathname.split("/")[2]);
 
@@ -28,6 +28,7 @@ const Page = () => {
         return <div>User Not Found</div>;
       } else {
         setProfileData(profile);
+        console.log(profile);
       }
     } catch (error) {
       console.error("Error:", error.message);

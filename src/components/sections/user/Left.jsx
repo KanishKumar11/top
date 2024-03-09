@@ -13,33 +13,35 @@ const Left = ({ data }) => {
     <div className="bg-[#262c2a] pt-16 pl-[8.33%] 7md:min-h-screen max-h-max flex gap-5 flex-col pr-10 relative overflow-y-hidden">
       <div className="relative w-max">
         <Image
-          src={profile?.avatar || "/images/profile.avif"}
+          src={profile?.data?.profile_pic}
           alt=""
           width={200}
           height={200}
           className="rounded-full"
         />
-        <div className="absolute bottom-[15px] right-[15px]">
-          <Image src="/images/verified.svg" alt="" width={36} height={36} />
-        </div>
+        {data?.is_verified && (
+          <div className="absolute bottom-[15px] right-[15px]">
+            <Image src="/images/verified.svg" alt="" width={36} height={36} />
+          </div>
+        )}
       </div>
       <div className=" text-white-A700 pb-5">
         <h1 className="font-bold mt-[24px] mb-[16px] text-4xl">
-          {profile?.Name}
+          {data?.data?.display_name}
         </h1>
-        <p className="text-lg font-medium">{profile?.about}</p>
+        <p className="text-lg font-medium">{profile?.data?.title}</p>
       </div>
       <div className="7md:flex hidden gap-5 flex-wrap mt-[30px] mr-[30px] ">
         <div className="h-20 w-20 bg-[rgba(0,0,0,0.2)] filter invert inline-flex px-[14px] pt-[12px] pb-[8px] flex-col aspect-square items-center justify -center text-xs font-medium leading-[129%] text-[rgba(0,0,0,0.88)] rounded-xl">
           <span>Top</span>
           <span className="text-3xl font-[900] leading-[129%] ">
-            {profile?.rankings}
+            {profile?.data?.achievements[0]?.percentage}%
           </span>
         </div>
         <div className="h-20 w-20 bg-[rgba(0,0,0,0.2)] filter invert inline-flex px-[14px] pt-[12px] pb-[8px] flex-col aspect-square items-center justify -center text-xs font-medium leading-[129%] text-[rgba(0,0,0,0.88)] rounded-xl">
           <span>Bookings</span>
           <span className="text-3xl font-[900] leading-[129%] ">
-            {profile?.bookings}
+            {profile?.data?.bookings_count}
           </span>
         </div>
         <div>
