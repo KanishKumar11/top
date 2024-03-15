@@ -8,10 +8,10 @@ const Footer = () => {
         <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
           <div className="flex md:flex-1 flex-col items-start justify-start w-[42%] md:w-full">
             <Image
-              className="h-24"
-              src="/images/img_linkimage_white_a700.svg"
+              className="h-12"
+              src="/logo.png"
               alt="linkimage_One"
-              width={100}
+              width={300}
               height={100}
             />
             <Text

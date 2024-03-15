@@ -1,5 +1,6 @@
 "use client";
 import Left from "@/components/sections/user/Left";
+
 import Right from "@/components/sections/user/Right";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
@@ -84,20 +85,27 @@ const Page = () => {
     fetchServiceData();
     fetchFeedbackData();
   }, [fetchFeedbackData, fetchProfileData, fetchServiceData]);
-  if (loading) return <>Loading...</>;
+  if (loading) return <></>;
   if (!(profileData.length > 0)) return <>No User Found!</>;
   return (
-    <div className="flex w-full flex-col 7md:flex-row">
-      <aside className="7md:w-1/3 w-full 7md:fixed">
+    <div className="flex w-full flex-col ">
+      {/* <div className="flex w-full flex-col 7md:flex-row"> */}
+      <aside className=" w-full  right-0">
+        {/* <aside className="7md:w-1/3 w-full 7md:fixed right-0"> */}
         <Left data={profileData[0]} />
       </aside>
-      <main className="7md:w-2/3 w-full self-end justify-self-end ml-auto">
+      <main className=" w-full self-start justify-self-start mr-auto">
+        {/* <main className="7md:w-2/3 w-full self-start justify-self-start mr-auto"> */}
         <Right
           data={profileData[0]}
           service={serviceData}
           feedback={feedbackData}
         />
       </main>
+      {/* <aside className=" w-full  right-0">
+        <aside className="7md:w-1/3 w-full 7md:fixed right-0">
+        <Left data={profileData[0]} />
+      </aside> */}
     </div>
   );
 };

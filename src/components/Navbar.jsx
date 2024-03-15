@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
-import { Button, Img, List, Text } from "@/components";
+import { Button } from "@/components";
 import Link from "next/link";
 import Image from "next/image";
 
 const Navbar = () => {
   const [active, setActive] = React.useState(false);
   return (
-    <header className="bg-gray-100 pt-5 pb-10 flex md:flex-col md:gap-5 items-center justify-center md:px-5 w-full px-20 ">
+    <header className="bg-zinc-100 pt-5 pb-10 flex md:flex-col md:gap-5 items-center justify-center md:px-5 w-full px-20 ">
       <div className="navbar flex flex-row justify-between items-center w-full max-w-7xl mx-auto">
         <div className="navbar-start flex-row flex items-center ">
           <div className="dropdown gap-3 flex lg:hidden">
@@ -59,10 +59,10 @@ const Navbar = () => {
           </div>
           <Link href="/">
             <Image
-              className="h-[37px] ml-5"
-              src="/images/img_linkimage.svg"
+              className="h-[30px] ml-5 w-auto"
+              src="/logo.png"
               alt="linkimage"
-              width={90}
+              width={490}
               height={90}
             />
           </Link>

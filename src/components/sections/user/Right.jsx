@@ -106,7 +106,7 @@ const Right = ({ data, service, feedback }) => {
     console.log(serviceData);
   }, [data, profile, service, serviceData]);
   return (
-    <div className=" bg-[#efece3]  w-full py-16 7md:px-[4%] px-[8.33%] flex flex-col gap-5 ">
+    <div className=" bg-zinc-100  w-full py-16 7md:px-[4%] px-[8.33%] flex flex-col gap-5 ">
       <div className="mb-10 flex items-center flex-wrap justify-start p-3.5 gap-5 flex-row">
         {profile?.featured?.map((item, index) => (
           <Link
@@ -135,7 +135,7 @@ const Right = ({ data, service, feedback }) => {
         ))}
       </div>
       <div className="flex flex-col gap-y-[32px] w-full">
-        <div className="flex w-full items-center justify-center">
+        <div className="flex w-full items-center justify-center gap-5">
           <div
             onClick={() => setActive("all")}
             className={`${

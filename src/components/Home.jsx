@@ -1,36 +1,71 @@
-import React, { useState } from "react";
+"use client";
 import { Button, Img, List, Text } from "@/components";
 import Image from "next/image";
-
+import React, { useCallback, useState, useMemo, useEffect } from "react";
+import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
 const Home = () => {
   const [active, setActive] = useState("data");
   const [activeSession, setActiveSession] = useState(1);
+  const supabase = useMemo(() => createClient(), []);
+  const [loading, setLoading] = useState(true);
+  const [profileData, setProfileData] = useState([]);
+  const [sliceVal, setSliceVal] = useState(16);
+  const fetchProfileData = useCallback(async () => {
+    try {
+      const { data: profile, error } = await supabase.from("top").select("*");
+
+      if (error) {
+        console.error(
+          "Error fetching profile data from Supabase:",
+          error.message
+        );
+        return <div>User Not Found</div>;
+      } else {
+        setProfileData(profile);
+        console.log(profile);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    } finally {
+      setLoading(false);
+    }
+  }, [supabase]);
+  useEffect(() => {
+    fetchProfileData();
+  });
+  const handleLoadMore = () => {
+    setSliceVal(sliceVal + 16);
+  };
+  if (loading) return <></>;
+  if (!(profileData.length > 0)) return <>No User Found!</>;
+
   return (
     <div className="flex flex-col font-oxygen items-center justify-end mx-auto w-full">
-      <div className="bg-gray-100 flex flex-col items-center justify-start pb-[76px] w-full">
+      <div className="bg-zinc-100 flex flex-col items-center justify-start pb-[76px] w-full">
         <div className="flex flex-col md:gap-10 gap-[70px] items-center justify-start w-full">
-          <div className="flex md:flex-col flex-row md:gap-5 items-center justify-center max-w-[1200px] mx-auto md:px-5 w-full">
+          <div className=" flex lg:hidden md:flex-col flex-row md:gap-5 items-center justify-center max-w-[1200px] mx-auto md:px-5 w-full ">
             <div className="flex md:flex-1 flex-col items-start justify-start w-[59%] md:w-full">
               <div className="flex flex-col items-start justify-start w-[83%] md:w-full">
-                <Image
+                {/* <Image
                   className="h-[50px] sm:h-auto object-cover w-[71%] md:w-full"
                   height={500}
                   width={500}
                   src="/images/img_linklaunchstoriespng.png"
                   alt="linklaunchstori"
-                />
+                /> */}
                 <div className="md:h-[150px] mt-[30px] relative w-3/4 sm:w-full ">
                   <Text
-                    className=" 12l:text-5xl text-[84px] leading-[80px] text-black-900_e0 top-[0]"
+                    className=" 12l:text-5xl text-[70px] leading-[80px] text-black-900_e0 top-[0]"
                     size="txtOxygenRegular86"
                   >
-                    Start your
+                    Hire Fractional
                   </Text>
                   <Text
-                    className=" 12l:text-5xl text-[83.48px] leading-[80px] text-black-900_e0  md:text-wrap"
+                    className=" 12l:text-5xl text-[70px] leading-[80px] text-black-900_e0  md:text-wrap"
                     size="txtOxygenBold8348"
                   >
-                    side hustle today
+                    Data Science Talent
                   </Text>
                 </div>
 
@@ -180,10 +215,181 @@ const Home = () => {
               </div>
             </div>
           </div>
+          <div className="lg:flex hidden md:flex-col flex-row md:gap-5 items-center justify-center max-w-[1200px] mx-auto md:px-5 w-full">
+            <div className="flex md:flex-1 flex-col items-center justify-start lg:pb-32 pb-0 w-[42%] md:w-full md:mt-20">
+              <div className="md:h-[486px] h-[494px] pb-1.5 relative w-full">
+                <div
+                  className="absolute bg-cover bg-no-repeat flex flex-col h-max inset-[0] items-center object-contain justify-center m-auto p-[5px] w-full"
+                  style={{
+                    backgroundImage: "url('images/img_divanttypography.svg')",
+                  }}
+                >
+                  <Image
+                    className="h-[360px+] sm:h-auto mb-[116px] object-contain w-[67%]"
+                    src="/images/img_image_360x327.png"
+                    alt="image_Eleven"
+                    height={660}
+                    width={800}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="flex md:flex-1 flex-col items-end justify-start w-[59%] md:w-full">
+              <div className="flex flex-col items-end justify-start w-[83%] md:w-full text-right">
+                {/* <Image
+                  className="h-[50px] sm:h-auto object-cover w-[71%] md:w-full"
+                  height={500}
+                  width={500}
+                  src="/images/img_linklaunchstoriespng.png"
+                  alt="linklaunchstori"
+                /> */}
+                <div className="md:h-[150px] mt-[30px] relative w-3/4 sm:w-full ">
+                  <Text
+                    className=" 12l:text-5xl text-[70px] leading-[80px] text-black-900_e0 top-[0] text-right"
+                    size="txtOxygenRegular86"
+                  >
+                    Hire Fractional
+                  </Text>
+                  <Text
+                    className=" 12l:text-5xl text-[70px] leading-[80px] text-black-900_e0  md:text-wrap text-right"
+                    size="txtOxygenBold8348"
+                  >
+                    Data Science Talent
+                  </Text>
+                </div>
+
+                <Text
+                  className="leading-[30.00px] mt-0.5 text-[22px] text-black-900_e0 sm:text-lg md:text-xl text-right"
+                  size="txtOxygenRegular22"
+                >
+                  <>
+                    Turn your passion and knowledge into a thriving business.
+                    <br />
+                    Help your audience get ahead in life
+                  </>
+                </Text>
+                <div className="flex sm:flex-col flex-row gap-3 items-center justify-between mt-[54px] w-full">
+                  <div className="bg-gray-900 border border-gray-900 border-solid flex flex-row gap-6 items-center justify-center p-3.5 rounded-md">
+                    <Text
+                      className="ml-[39px] mt-1.5 text-[19.69px] text-center text-white-A700"
+                      size="txtOxygenBold1969"
+                    >
+                      Start My Page
+                    </Text>
+                    <Image
+                      className="h-5 mr-[39px] w-5"
+                      height={20}
+                      width={20}
+                      src="/images/img_imgarrowright.svg"
+                      alt="imgarrowright"
+                    />
+                  </div>
+                  <Button
+                    className="cursor-pointer flex items-center justify-center min-w-[284px] rounded-md"
+                    leftIcon={
+                      <Image
+                        className="h-[42px] mr-2"
+                        src="/images/img_overflowmenu.svg"
+                        width={42}
+                        height={42}
+                        alt="overflow_menu"
+                      />
+                    }
+                    color="gray_900"
+                    size="xs"
+                    variant="outline"
+                  >
+                    <div className="font-bold text-[19.22px] text-center">
+                      Watch The Film
+                    </div>
+                  </Button>
+                </div>
+                <div className="flex sm:flex-col flex-row gap-5 items-start justify-start mt-[30px] w-[66%] md:w-full">
+                  <div className="flex relative w-[47%] sm:w-full">
+                    <div className="flex my-auto mx-auto">
+                      <Image
+                        className="h-[50px] my-auto rounded-[50%] w-[50px]"
+                        src="/images/img_image.png"
+                        height={50}
+                        width={50}
+                        alt="image_One"
+                      />
+                      <Image
+                        className="h-[50px] ml-[-8px] my-auto rounded-[50%] w-[50px] z-[1]"
+                        height={50}
+                        width={50}
+                        src="/images/img_image_50x50.png"
+                        alt="image_Two"
+                      />
+                      <Image
+                        className="h-[50px] ml-[-8px] my-auto rounded-[50%] w-[50px] z-[1]"
+                        height={50}
+                        width={50}
+                        src="/images/img_image_1.png"
+                        alt="image_Three"
+                      />
+                      <Image
+                        className="h-[50px] ml-[-8px] my-auto rounded-[50%] w-[50px] z-[1]"
+                        height={50}
+                        width={50}
+                        src="/images/img_image_2.png"
+                        alt="image_Four"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-[7px] items-center justify-start w-[49%] sm:w-full">
+                    <div className="flex flex-row gap-3.5  items-center justify-between">
+                      <Image
+                        className="h-[25px] w-[25px]"
+                        src="/images/img_radiogroupitem.svg"
+                        alt="radiogroupitem"
+                        height={25}
+                        width={25}
+                      />
+                      <Image
+                        className="h-[25px] w-[25px]"
+                        src="/images/img_radiogroupitem.svg"
+                        alt="radiogroupitem_One"
+                        height={25}
+                        width={25}
+                      />
+                      <Image
+                        className="h-[25px] w-[25px]"
+                        src="/images/img_radiogroupitem.svg"
+                        alt="radiogroupitem_Two"
+                        width={25}
+                        height={25}
+                      />
+                      <Image
+                        className="h-[25px] w-[25px]"
+                        src="/images/img_radiogroupitem.svg"
+                        alt="radiogroupitem_Three"
+                        width={25}
+                        height={25}
+                      />
+                      <Image
+                        className="h-[25px] w-[25px]"
+                        src="/images/img_radiogroupitem.svg"
+                        alt="radiogroupitem_Four"
+                        width={25}
+                        height={25}
+                      />
+                    </div>
+                    <Text
+                      className="text-black-900_e0 text-lg"
+                      size="txtOxygenRegular18"
+                    >
+                      5/5 by 1000+ creators
+                    </Text>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex flex-col items-center relative w-full ">
-        <div className="bg-orange-200 flex flex-col gap-[42px] py-20 pb-40 items-center justify-end mx-auto pt-[90px] w-full">
+        <div className="bg-pink-100 flex flex-col gap-[42px] py-20 pb-40 items-center justify-end mx-auto pt-[90px] w-full">
           <div className="flex sm:flex-col flex-row gap-3 items-center justify-center pt-1.5 px-1.5 w-full">
             <Text
               className="sm:ml-[0]  md:text-5xl text-7xl text-black-900_e0 text-center"
@@ -227,523 +433,154 @@ const Home = () => {
             </div>
             <div className="flex flex-col items-center justify-start p-3.5 w-full">
               {active == "data" && (
-                <List
-                  className="sm:flex-col flex-row gap-8 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-4 justify-center mb-[26px] p-2.5 w-[59%]"
-                  orientation="horizontal"
-                >
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_purple_200.svg"
-                        alt="divanttypograph"
-                        height={116}
-                        width={300}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_118x118.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
+                <div className="flex gap-10 flex-wrap">
+                  {profileData.slice(10, 14).map((item, index) => (
+                    <div key={index} className="h-[410px] flex">
+                      <Link href={`/user/${item.username}`}>
+                        <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-[250px] h-full">
+                          <div className=" h-[170px] relative w-full overflow-clip rounded-[16px]">
+                            <Image
+                              className="absolute inset-x-[0] mx-auto top-[0]"
+                              src="/images/img_divanttypography_purple_200.svg"
+                              alt="divanttypograph"
+                              height={500}
+                              width={500}
+                            />
+                            <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto w-[120px] rounded-full pt-2 mb-2">
+                              <Image
+                                className="h-[118px] md:h-auto rounded-full object-cover w-[118px]"
+                                src={item.data.profile_pic}
+                                alt="image_One"
+                                width={500}
+                                height={500}
+                              />
+                            </div>
+                          </div>
+                          <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
+                            <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[76px] w-full">
+                              <Text
+                                className="sm:text-[19.44px] md:text-[21.44px] text-[23.44px] text-black-900_e0 text-center"
+                                size="txtOxygenBold2344"
+                              >
+                                {item.data.full_name}
+                              </Text>
+                            </div>
+                            <div className="flex flex-col items-center justify-start px-1 w-full">
+                              <Text
+                                className="leading-[20.00px] text-base text-black-900_e0 text-center"
+                                size="txtOxygenRegular16"
+                              >
+                                <>{item.data.description.slice(0, 100)}...</>
+                              </Text>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[76px] w-full">
-                        <Text
-                          className="sm:text-[19.44px] md:text-[21.44px] text-[23.44px] text-black-900_e0 text-center"
-                          size="txtOxygenBold2344"
-                        >
-                          luna
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-1 w-full">
-                        <Text
-                          className="leading-[20.00px] text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          <>
-                            helps you build a career in
-                            <br />
-                            data science
-                          </>
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_red_400.svg"
-                        alt="divanttypograph"
-                        height={116}
-                        width={300}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_3.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-[84px] w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[45px] w-full">
-                        <Text
-                          className="sm:text-[18.88px] md:text-[20.88px] text-[22.88px] text-black-900_e0 text-center"
-                          size="txtOxygenBold2288"
-                        >
-                          Matt Mike
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-[3px] w-full">
-                        <Text
-                          className="text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          helps folks break into data
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_blue_a100.svg"
-                        alt="divanttypograph"
-                        height={116}
-                        width={300}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_4.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[59px] w-full">
-                        <Text
-                          className="text-2xl md:text-[22px] text-black-900_e0 text-center sm:text-xl"
-                          size="txtOxygenBold24"
-                        >
-                          Jessica
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-2 w-full">
-                        <Text
-                          className="leading-[20.00px] text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          <>
-                            global data leader in the
-                            <br />
-                            energy industry
-                          </>
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_green_400.svg"
-                        alt="divanttypograph"
-                        width={300}
-                        height={116}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_5.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[66px] w-full">
-                        <Text
-                          className="sm:text-[19.25px] md:text-[21.25px] text-[23.25px] text-black-900_e0 text-center"
-                          size="txtOxygenBold2325"
-                        >
-                          Albert
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-[11px] w-full">
-                        <Text
-                          className="leading-[20.00px] text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          <>
-                            helps people accelerate
-                            <br />
-                            their career in data
-                          </>
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                </List>
+                  ))}
+                </div>
               )}
               {active == "ml" && (
-                <List
-                  className="sm:flex-col flex-row gap-8 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-4 justify-center mb-[26px] p-2.5 w-[59%]"
-                  orientation="horizontal"
-                >
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_blue_a100.svg"
-                        alt="divanttypograph"
-                        height={116}
-                        width={300}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_4.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
+                <div className="flex gap-10 flex-wrap">
+                  {profileData.slice(16, 20).map((item, index) => (
+                    <div key={index} className="h-[410px] flex">
+                      <Link href={`/user/${item.username}`}>
+                        <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-[250px] h-full">
+                          <div className=" h-[170px] relative w-full overflow-clip rounded-[16px]">
+                            <Image
+                              className="absolute inset-x-[0] mx-auto top-[0]"
+                              src="/images/img_divanttypography_purple_200.svg"
+                              alt="divanttypograph"
+                              height={500}
+                              width={500}
+                            />
+                            <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto w-[120px] rounded-full pt-2 mb-2">
+                              <Image
+                                className="h-[118px] md:h-auto rounded-full object-cover w-[118px]"
+                                src={item.data.profile_pic}
+                                alt="image_One"
+                                width={500}
+                                height={500}
+                              />
+                            </div>
+                          </div>
+                          <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
+                            <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[76px] w-full">
+                              <Text
+                                className="sm:text-[19.44px] md:text-[21.44px] text-[23.44px] text-black-900_e0 text-center"
+                                size="txtOxygenBold2344"
+                              >
+                                {item.data.full_name}
+                              </Text>
+                            </div>
+                            <div className="flex flex-col items-center justify-start px-1 w-full">
+                              <Text
+                                className="leading-[20.00px] text-base text-black-900_e0 text-center"
+                                size="txtOxygenRegular16"
+                              >
+                                <>{item.data.description.slice(0, 100)}...</>
+                              </Text>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[59px] w-full">
-                        <Text
-                          className="text-2xl md:text-[22px] text-black-900_e0 text-center sm:text-xl"
-                          size="txtOxygenBold24"
-                        >
-                          Jessica
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-2 w-full">
-                        <Text
-                          className="leading-[20.00px] text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          <>
-                            global data leader in the
-                            <br />
-                            energy industry
-                          </>
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_green_400.svg"
-                        alt="divanttypograph"
-                        width={300}
-                        height={116}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_5.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[66px] w-full">
-                        <Text
-                          className="sm:text-[19.25px] md:text-[21.25px] text-[23.25px] text-black-900_e0 text-center"
-                          size="txtOxygenBold2325"
-                        >
-                          Albert
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-[11px] w-full">
-                        <Text
-                          className="leading-[20.00px] text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          <>
-                            helps people accelerate
-                            <br />
-                            their career in data
-                          </>
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_purple_200.svg"
-                        alt="divanttypograph"
-                        width={300}
-                        height={116}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_118x118.png"
-                          alt="image_One"
-                          height={118}
-                          width={118}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[76px] w-full">
-                        <Text
-                          className="sm:text-[19.44px] md:text-[21.44px] text-[23.44px] text-black-900_e0 text-center"
-                          size="txtOxygenBold2344"
-                        >
-                          luna
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-1 w-full">
-                        <Text
-                          className="leading-[20.00px] text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          <>
-                            helps you build a career in
-                            <br />
-                            data science
-                          </>
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_red_400.svg"
-                        alt="divanttypograph"
-                        width={300}
-                        height={116}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_3.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-[84px] w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[45px] w-full">
-                        <Text
-                          className="sm:text-[18.88px] md:text-[20.88px] text-[22.88px] text-black-900_e0 text-center"
-                          size="txtOxygenBold2288"
-                        >
-                          Matt Mike
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-[3px] w-full">
-                        <Text
-                          className="text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          helps folks break into data
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                </List>
+                  ))}
+                </div>
               )}
               {active == "ai" && (
-                <List
-                  className="sm:flex-col flex-row gap-8 grid sm:grid-cols-1 md:grid-cols-2 grid-cols-4 justify-center mb-[26px] p-2.5 w-[59%]"
-                  orientation="horizontal"
-                >
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_red_400.svg"
-                        alt="divanttypograph"
-                        width={300}
-                        height={116}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_3.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
+                <div className="flex gap-10 flex-wrap">
+                  {profileData.slice(30, 34).map((item, index) => (
+                    <div key={index} className="h-[410px] flex">
+                      <Link href={`/user/${item.username}`}>
+                        <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-[250px] h-full">
+                          <div className=" h-[170px] relative w-full overflow-clip rounded-[16px]">
+                            <Image
+                              className="absolute inset-x-[0] mx-auto top-[0]"
+                              src="/images/img_divanttypography_purple_200.svg"
+                              alt="divanttypograph"
+                              height={500}
+                              width={500}
+                            />
+                            <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto w-[120px] rounded-full pt-2 mb-2">
+                              <Image
+                                className="h-[118px] md:h-auto rounded-full object-cover w-[118px]"
+                                src={item.data.profile_pic}
+                                alt="image_One"
+                                width={500}
+                                height={500}
+                              />
+                            </div>
+                          </div>
+                          <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
+                            <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[76px] w-full">
+                              <Text
+                                className="sm:text-[19.44px] md:text-[21.44px] text-[23.44px] text-black-900_e0 text-center"
+                                size="txtOxygenBold2344"
+                              >
+                                {item.data.full_name}
+                              </Text>
+                            </div>
+                            <div className="flex flex-col items-center justify-start px-1 w-full">
+                              <Text
+                                className="leading-[20.00px] text-base text-black-900_e0 text-center"
+                                size="txtOxygenRegular16"
+                              >
+                                <>{item.data.description.slice(0, 100)}...</>
+                              </Text>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-[84px] w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[45px] w-full">
-                        <Text
-                          className="sm:text-[18.88px] md:text-[20.88px] text-[22.88px] text-black-900_e0 text-center"
-                          size="txtOxygenBold2288"
-                        >
-                          Matt Mike
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-[3px] w-full">
-                        <Text
-                          className="text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          helps folks break into data
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_blue_a100.svg"
-                        alt="divanttypograph"
-                        width={300}
-                        height={116}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_4.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[59px] w-full">
-                        <Text
-                          className="text-2xl md:text-[22px] text-black-900_e0 text-center sm:text-xl"
-                          size="txtOxygenBold24"
-                        >
-                          Jessica
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-2 w-full">
-                        <Text
-                          className="leading-[20.00px] text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          <>
-                            global data leader in the
-                            <br />
-                            energy industry
-                          </>
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_green_400.svg"
-                        alt="divanttypograph"
-                        width={300}
-                        height={116}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_5.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[66px] w-full">
-                        <Text
-                          className="sm:text-[19.25px] md:text-[21.25px] text-[23.25px] text-black-900_e0 text-center"
-                          size="txtOxygenBold2325"
-                        >
-                          Albert
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-[11px] w-full">
-                        <Text
-                          className="leading-[20.00px] text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          <>
-                            helps people accelerate
-                            <br />
-                            their career in data
-                          </>
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white-A700 border border-black-900_19 border-solid flex flex-col gap-3 items-center justify-start rounded-[16px] w-full">
-                    <div className="md:h-[118px] h-[170px] relative w-full">
-                      <Image
-                        className="absolute h-[116px] inset-x-[0] mx-auto top-[0]"
-                        src="/images/img_divanttypography_purple_200.svg"
-                        alt="divanttypograph"
-                        width={300}
-                        height={116}
-                      />
-                      <div className="absolute bottom-[0] flex flex-col h-[120px] inset-x-[0] items-center justify-start mx-auto rounded-[50%] w-[120px]">
-                        <Image
-                          className="h-[118px] md:h-auto object-cover w-[118px]"
-                          src="/images/img_image_118x118.png"
-                          alt="image_One"
-                          width={118}
-                          height={118}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2 items-center justify-start mb-16 w-[83%] md:w-full">
-                      <div className="flex flex-col items-center justify-start md:px-10 sm:px-5 px-[76px] w-full">
-                        <Text
-                          className="sm:text-[19.44px] md:text-[21.44px] text-[23.44px] text-black-900_e0 text-center"
-                          size="txtOxygenBold2344"
-                        >
-                          luna
-                        </Text>
-                      </div>
-                      <div className="flex flex-col items-center justify-start px-1 w-full">
-                        <Text
-                          className="leading-[20.00px] text-base text-black-900_e0 text-center"
-                          size="txtOxygenRegular16"
-                        >
-                          <>
-                            helps you build a career in
-                            <br />
-                            data science
-                          </>
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                </List>
+                  ))}
+                </div>
               )}
             </div>
           </div>
         </div>
       </div>
-      <div className="bg-white-A700 flex flex-col items-center justify-start p-[60px] md:px-10 sm:px-5 w-full">
+      <div className="bg-zinc-100 flex flex-col items-center justify-start p-[60px] md:px-10 sm:px-5 w-full">
         <div className="flex flex-col md:gap-10 gap-[100px] items-center justify-start max-w-[1200px] mb-[110px] mx-auto pt-[100px] w-full">
           <div className="flex md:flex-col flex-row md:gap-10 items-center justify-between w-full">
             <div className="flex md:flex-1 flex-col items-start justify-center pr-[7px] py-[7px] w-1/2 md:w-full">
@@ -753,7 +590,7 @@ const Home = () => {
                   size="txtOxygenBold6325"
                 >
                   <>
-                    Create your Topmate page in a{" "}
+                    Create your DataChamp page in a{" "}
                     <span
                       className=" sm:text-[45.63px] md:text-[51.63px] text-[59.63px] text-deep_orange-400 tracking-[-1.92px]"
                       size="txtOxygenBold5962"
@@ -803,7 +640,7 @@ const Home = () => {
               <div class="max-w-2xl mx-auto">
                 <div className="hs-accordion-group">
                   <div
-                    className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05] active"
+                    className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05] active"
                     id="hs-basic-with-title-and-arrow-stretched-heading-one"
                   >
                     <button
@@ -856,7 +693,7 @@ const Home = () => {
                     )}
                   </div>
                   <div
-                    className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
+                    className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
                     id="hs-basic-with-title-and-arrow-stretched-heading-two"
                   >
                     <button
@@ -910,7 +747,7 @@ const Home = () => {
                   </div>
 
                   <div
-                    className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
+                    className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
                     id="hs-basic-with-title-and-arrow-stretched-heading-three"
                   >
                     <button
@@ -963,7 +800,7 @@ const Home = () => {
                     )}
                   </div>
                   <div
-                    className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
+                    className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
                     id="hs-basic-with-title-and-arrow-stretched-heading-four"
                   >
                     <button
@@ -1016,7 +853,7 @@ const Home = () => {
                     )}
                   </div>
                   <div
-                    className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
+                    className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
                     id="hs-basic-with-title-and-arrow-stretched-heading-five"
                   >
                     <button
@@ -1069,7 +906,7 @@ const Home = () => {
                     )}
                   </div>
                   <div
-                    className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
+                    className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
                     id="hs-basic-with-title-and-arrow-stretched-heading-six"
                   >
                     <button
@@ -1127,7 +964,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-100_01 md:h-[1485px] sm:h-[590px] h-[968px] p-[90px] md:px-5 relative w-full">
+      <div className="bg-zinc-100 md:h-[1485px] sm:h-[590px] h-[968px] p-[90px] md:px-5 relative w-full">
         <div className="lg:absolute flex md:flex-col flex-row md:gap-5 inset-x-[0] items-start justify-center lg:mx-auto pb-16 md:px-10 px-16 gap-5 sm:px-5 top-[9%] lg:w-[63%] text-center">
           <Text
             className="md:text-5xl text-[62.75px] text-black-900 text-center"
@@ -1139,7 +976,7 @@ const Home = () => {
                 className="mr-[66px] md:text-5xl text-[64px] text-black-900 text-center"
                 size="txtOxygenRegular64"
               >
-                on topmate
+                on DataChamp
               </span>
             </>
           </Text>
@@ -1200,7 +1037,7 @@ const Home = () => {
               className="md:text-5xl text-[62.13px] text-center text-white-A700"
               size="txtOxygenBold6212"
             >
-              People love using topmate
+              People love using DataChamp
             </Text>
             <div className="flex flex-col items-center justify-start w-full">
               <div className="md:gap-5 gap-[30px] grid sm:grid-cols-1 md:grid-cols-2 grid-cols-3 justify-center min-h-[auto] w-full">
@@ -1313,7 +1150,7 @@ const Home = () => {
                         size="txtOxygenRegular20Black900e0"
                       >
                         <>
-                          Topmate is my go-to platform for
+                          DataChamp is my go-to platform for
                           <br />
                           scheduling 1:1 sessions and hosting
                           <br />
@@ -1455,11 +1292,11 @@ const Home = () => {
                         size="txtOxygenRegular20Black900e0"
                       >
                         <>
-                          I love Topmate! It has made it
+                          I love DataChamp! It has made it
                           <br />
                           seamless to schedule mentoring
                           <br />
-                          sessions! Big fan of Topmate’s
+                          sessions! Big fan of DataChamp’s
                           <br />
                           WhatsApp integration.
                         </>
@@ -1495,7 +1332,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-100 flex flex-col items-center justify-start p-[60px] md:px-10 sm:px-5 w-full">
+      <div className="bg-zinc-100 flex flex-col items-center justify-start p-[60px] md:px-10 sm:px-5 w-full">
         <div className="flex flex-col items-center justify-start max-w-[1200px] mb-20 mx-auto w-full">
           <div className="flex md:flex-col flex-row md:gap-5 items-center justify-evenly w-full">
             <div className="flex md:flex-1 flex-col items-start justify-start py-[97px] w-[67%] md:w-full">
@@ -1522,7 +1359,7 @@ const Home = () => {
                     Calculated using your LinkedIn profile and comparing based
                     on similar
                     <br />
-                    profiles on topmate
+                    profiles on DataChamp
                   </>
                 </Text>
               </div>
@@ -1597,7 +1434,7 @@ const Home = () => {
                           className="text-gray-200  text-sm"
                           size="txtRobotoMedium14"
                         >
-                          Topmate
+                          DataChamp
                         </Text>
                       </div>
                     </div>
@@ -1632,7 +1469,7 @@ const Home = () => {
                 className="md:ml-[0] ml-[13px] mt-[57px] text-[19px] text-gray-900_02"
                 size="txtOxygenRegular19"
               >
-                Creator earnings on topmate (2023)
+                Creator earnings on DataChamp (2023)
               </Text>
               <Text
                 className="md:ml-[0] ml-[13px] mt-[43px] md:text-5xl text-[80px] text-gray-900_02"
@@ -1675,7 +1512,7 @@ const Home = () => {
             <div class="max-w-2xl mx-auto">
               <div className="hs-accordion-group">
                 <div
-                  className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05] active"
+                  className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05] active"
                   id="hs-basic-with-title-and-arrow-stretched-heading-one"
                 >
                   <button
@@ -1728,7 +1565,7 @@ const Home = () => {
                   )}
                 </div>
                 <div
-                  className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
+                  className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
                   id="hs-basic-with-title-and-arrow-stretched-heading-two"
                 >
                   <button
@@ -1782,7 +1619,7 @@ const Home = () => {
                 </div>
 
                 <div
-                  className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
+                  className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
                   id="hs-basic-with-title-and-arrow-stretched-heading-three"
                 >
                   <button
@@ -1835,7 +1672,7 @@ const Home = () => {
                   )}
                 </div>
                 <div
-                  className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
+                  className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
                   id="hs-basic-with-title-and-arrow-stretched-heading-four"
                 >
                   <button
@@ -1888,7 +1725,7 @@ const Home = () => {
                   )}
                 </div>
                 <div
-                  className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
+                  className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
                   id="hs-basic-with-title-and-arrow-stretched-heading-five"
                 >
                   <button
@@ -1941,7 +1778,7 @@ const Home = () => {
                   )}
                 </div>
                 <div
-                  className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
+                  className="hs-accordion hs-accordion-active:bg-zinc-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05]"
                   id="hs-basic-with-title-and-arrow-stretched-heading-six"
                 >
                   <button
