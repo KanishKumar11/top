@@ -402,3 +402,32 @@ li:hover {
   display: flex;
   justify-content: space-between;
 }
+.resume div{
+  background-color: #f3e0e0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: 20px;
+
+  /* text-align: center; */
+}
+.resume h1{
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+.resume h2{
+  font-size: 25px;
+  font-weight: 600;
+  text-align: left;
+}
+.resume h3{
+  text-align: left;
+  font-size: 25px;
+  font-weight: bold;
+}
+.resume p strong{
+  text-align: left;
+
+}
